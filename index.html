@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información Bancaria</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Gill Sans MT", sans-serif;
+        }
+        .title {
+            text-align: center;
+            font-size: 15pt;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        .subtitle {
+            text-align: center;
+            font-size: 14pt;
+            margin-bottom: 15px;
+        }
+        .section-title {
+            font-size: 14.5pt;
+            font-weight: bold;
+            margin: 15px 5px;
+        }
+        .details {
+            font-size: 13pt;
+            margin: 5px 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .note {
+            font-size: 11pt;
+            margin: 10px 7px;
+        }
+        .spacer {
+            margin: 20px 0;
+        }
+        .copy-btn {
+            padding: 5px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+        }
+        .copy-btn:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+    <script>
+        function copyToClipboard(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            textarea.setSelectionRange(0, 99999); // Para dispositivos móviles
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+        }
+    </script>
+</head>
+<body>
+    <div class="spacer"></div>
+    
+    <div class="title">RAZÓN SOCIAL: INGENIERIA DE LA INFORMÁTICA S.A. - INFORDATA S.A.</div>
+    <div class="subtitle">RUC: 20102188293</div>
+    
+    <div class="section-title">Banco BBVA Perú - Cuentas corrientes</div>
+    <div class="details">
+        <span>MONEDA NACIONAL (S/): 001101470100005794</span>
+        <button class="copy-btn" onclick="copyToClipboard('001101470100005794')">Copiar</button>
+    </div>
+    <div class="details">
+        <span>CCI MONEDA NACIONAL (S/): 01114700010000579461</span>
+        <button class="copy-btn" onclick="copyToClipboard('01114700010000579461')">Copiar</button>
+    </div>
+    <div class="details">
+        <span>MONEDA EXTRANJERA (US $): 001101470100013207</span>
+        <button class="copy-btn" onclick="copyToClipboard('001101470100013207')">Copiar</button>
+    </div>
+    <div class="details">
+        <span>CCI MONEDA EXTRANJERA (US $): 01114700010001320764</span>
+        <button class="copy-btn" onclick="copyToClipboard('01114700010001320764')">Copiar</button>
+    </div>
+    <div class="note">*Encuéntranos en Pago de Servicios / INFORDATA S.A.</div>
+    
+    <div class="spacer"></div>
+    
+    <div class="section-title">BANCO DE CRÉDITO - BCP - Cuentas corrientes</div>
+    <div class="details">
+        <span>MONEDA NACIONAL (S/): 1930809372074</span>
+        <button class="copy-btn" onclick="copyToClipboard('1930809372074')">Copiar</button>
+    </div>
+    <div class="details">
+        <span>CCI MONEDA NACIONAL (S/): 00219300080937207419</span>
+        <button class="copy-btn" onclick="copyToClipboard('00219300080937207419')">Copiar</button>
+    </div>
+    <div class="details">
+        <span>MONEDA EXTRANJERA (US $): 1930844974199</span>
+        <button class="copy-btn" onclick="copyToClipboard('1930844974199')">Copiar</button>
+    </div>
+    <div class="details">
+        <span>CCI MONEDA EXTRANJERA (US $): 00219300084497419913</span>
+        <button class="copy-btn" onclick="copyToClipboard('00219300084497419913')">Copiar</button>
+    </div>
+    <div class="note">
+        Servicio de recaudación para depósitos banco de crédito.<br>
+        CÓDIGO DE RECAUDACIÓN MONEDA NACIONAL / EXTRANJERA: 20102188293<br>
+        *Sirve para ambas cuentas.
+    </div>
+    
+    <div class="spacer"></div>
+    
+    <div class="section-title">Banco de la Nación - Cuentas corrientes</div>
+    <div class="details">
+        <span>MONEDA NACIONAL: 00000644420</span>
+        <button class="copy-btn" onclick="copyToClipboard('00000644420')">Copiar</button>
+    </div>
+    <div class="details">
+        <span>CCI MONEDA NACIONAL: 01800000000064442002</span>
+        <button class="copy-btn" onclick="copyToClipboard('01800000000064442002')">Copiar</button>
+    </div>
+    <div class="details">
+        <span>CUENTA DE DETRACCIÓN: 00005035856</span>
+        <button class="copy-btn" onclick="copyToClipboard('00005035856')">Copiar</button>
+    </div>
+</body>
+</html>
