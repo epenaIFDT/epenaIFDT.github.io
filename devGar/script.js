@@ -143,6 +143,6 @@ window.addEventListener("DOMContentLoaded", () => {
   document.getElementById("btn-pdf").addEventListener("click", imprimirYEnviar);
   setFecha();
   document.getElementById("version-info").textContent =
-    "Versión: b.07.31." + timeStamp();
+    "Versión: b.07.31.2" + timeStamp();
 });
 window.addEventListener("beforeprint", setFecha);
