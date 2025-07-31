@@ -4,13 +4,8 @@
   <meta charset="utf-8" />
   <title>Solicitud de Devolución de Garantía</title>
 
-  <!-- Hoja de estilos -->
   <link rel="stylesheet" href="style.css" />
-
-  <!-- Librería para crear el PDF -->
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
-  <!-- Lógica de la página -->
   <script defer src="script.js"></script>
 </head>
 <body>
@@ -21,11 +16,9 @@
     <h2>SOLICITUD DE DEVOLUCIÓN DE GARANTÍA DE FIEL CUMPLIMIENTO</h2>
 
     <table id="formulario">
-      <colgroup>
-        <col class="w4"><col class="w18"><col class="w39"><col class="w39">
-      </colgroup>
+      <colgroup><col class="w4"><col class="w18"><col class="w39"><col class="w39"></colgroup>
 
-      <!-- 1. Datos de la empresa ------------------------------------------------>
+      <!-- 1. Datos de la empresa -->
       <tr>
         <td class="col-num" rowspan="4">1</td>
         <td class="col-title" rowspan="4">DATOS DE LA<br>EMPRESA O<br>PERSONA NATURAL</td>
@@ -52,7 +45,7 @@
         <td><input type="email" id="correo" /></td>
       </tr>
 
-      <!-- 2. Datos del acuerdo ------------------------------------------------->
+      <!-- 2. Datos del acuerdo -->
       <tr>
         <td class="col-num" rowspan="2">2</td>
         <td class="col-title" rowspan="2">DATOS DEL ACUERDO</td>
@@ -77,7 +70,7 @@ COMPUTADORAS PORTÁTILES Y ESCÁNERES
         <td><input type="text" /></td>
       </tr>
 
-      <!-- 3. Motivos ----------------------------------------------------------->
+      <!-- 3. Motivos -->
       <tr>
         <td class="col-num" rowspan="2">3</td>
         <td class="col-title" rowspan="2">MOTIVOS</td>
@@ -94,7 +87,7 @@ COMPUTADORAS PORTÁTILES Y ESCÁNERES
       </tr>
       <tr><td colspan="2">(*) Precisar:</td></tr>
 
-      <!-- 4. Firma ------------------------------------------------------------->
+      <!-- 4. Firma -->
       <tr>
         <td class="col-num" rowspan="2">4</td>
         <td class="area-grande" colspan="2"><div id="fecha-actual">&nbsp;</div></td>
@@ -110,7 +103,6 @@ COMPUTADORAS PORTÁTILES Y ESCÁNERES
   <!-- Versión (no se imprime) -->
   <div class="no-print version" id="version-info"></div>
 
-  <!-- Botón de impresión -->
   <button id="btn-pdf" class="no-print">Imprimir PDF</button>
 </body>
 </html>
