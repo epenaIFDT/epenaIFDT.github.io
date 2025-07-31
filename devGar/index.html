@@ -4,21 +4,18 @@
 <meta charset="utf-8">
 <title>Solicitud de Devolución de Garantía</title>
 
-<!-- =======  ESTILOS  ======= -->
 <style>
     body{font-family:Arial,sans-serif;font-size:12px;margin:40px}
     h1,h2{text-align:center;margin:0}
     h1{font-size:16px;margin-bottom:5px}
     h2{font-size:14px;margin-bottom:18px}
 
-    /* Tabla y bordes uniformes */
     #formulario{width:100%;border-collapse:collapse;border:1px solid #000}
     #formulario td{border:1px solid #000;padding:4px;vertical-align:top}
     col.w4  {width:4%}
     col.w18 {width:18%}
     col.w39 {width:39%}
 
-    /* Controles */
     input[type=text],input[type=email],select,textarea{
         width:100%;border:none;outline:none;font:inherit;text-align:left;background:transparent
     }
@@ -26,7 +23,6 @@
     textarea{resize:none;overflow:hidden;white-space:pre-wrap;word-break:break-word}
     textarea::-webkit-scrollbar{width:0;height:0} textarea{scrollbar-width:none}
 
-    /* Misceláneos */
     .col-num{text-align:center;font-weight:bold}
     .col-title{font-weight:bold}
     .checkbox-group{display:flex;justify-content:space-between;margin-bottom:3px}
@@ -35,15 +31,12 @@
     .centered{text-align:center;font-weight:bold}
     tr{page-break-inside:avoid}
 
-    /* firma 80 % */
     .firma-img{display:block;margin:0 auto;max-width:80%;height:auto}
-
-    /* botón */
-    #btn-pdf{margin-top:18px;padding:8px 12px;font-size:12px;background:#eee;border:1px solid #ccc;cursor:pointer}
     .no-print{display:block}
+    .version{margin-top:15px;color:#777;font-size:11px}
     @media print{.no-print{display:none}}
 
-    /* Fecha centrada */
+    #btn-pdf{margin-top:18px;padding:8px 12px;font-size:12px;background:#eee;border:1px solid #ccc;cursor:pointer}
     #fecha-actual{text-align:center}
 </style>
 </head>
@@ -138,24 +131,30 @@ COMPUTADORAS PORTÁTILES Y ESCÁNERES
     </table>
 </div>
 
+<!-- Texto de versión no imprimible -->
+<div class="no-print version" id="version-info"></div>
+
 <button id="btn-pdf" class="no-print">Imprimir PDF</button>
 
-<!-- html2pdf -->
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 <script>
-/* ==== Datos x RUC ==== */
 const empresas={
   "20601438462":{razon:"OFICINA TOTAL S.A.",rep:"PAREDES ZEBALLOS,\nPAOLA ESTHER",correo:"pparedes@oficinatotal.pe"},
   "20102188293":{razon:"INGENIERIA DE LA INFORMATICA S.A.\nINFORDATA S.A.",rep:"VICENTE HUAPAYA\nJUAN CARLOS",correo:"jvicente@infordata.com.pe"},
   "20602334237":{razon:"VASTEC S.A.",rep:"VICENTE HUAPAYA,\nJUAN CARLOS",correo:"jvicente@vastec.com.pe"}
 };
 
-/* ==== utilidades ==== */
 const autoResize=ta=>{ta.style.height='auto';ta.style.height=ta.scrollHeight+'px';};
-const timestamp=()=>{const d=new Date();return d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0')+String(d.getHours()).padStart(2,'0')+String(d.getMinutes()).padStart(2,'0');};
+const timestamp=()=>{
+    const d=new Date();
+    return d.getFullYear().toString() +
+           String(d.getMonth()+1).padStart(2,'0') +
+           String(d.getDate()).padStart(2,'0') +
+           String(d.getHours()).padStart(2,'0') +
+           String(d.getMinutes()).padStart(2,'0');
+};
 
-/* ==== rellenar ==== */
 function rellenar(){
   const ruc=document.getElementById('ruc').value,d=empresas[ruc]||{};
   document.getElementById('razon_social').value=d.razon||'';
@@ -163,34 +162,31 @@ function rellenar(){
   document.getElementById('correo').value=d.correo||'';
   document.querySelectorAll('textarea').forEach(autoResize);
 
-  /* firma */
   const img=document.getElementById('firma-img');
   if(ruc){img.src=`${ruc}.png`;img.style.display='block';}
   else{img.removeAttribute('src');img.style.display='none';}
 }
 
-/* ==== fecha DD/MM/YYYY ==== */
-const setFecha=()=>{
+function setFecha(){
   const f=new Date();
   const dd=String(f.getDate()).padStart(2,'0');
   const mm=String(f.getMonth()+1).padStart(2,'0');
   const yyyy=f.getFullYear();
   document.getElementById('fecha-actual').textContent=`${dd}/${mm}/${yyyy}`;
-};
+}
 
-/* ==== pdf ==== */
 async function generarPDF(){
-  if(typeof html2pdf==='undefined'){alert('html2pdf no cargó');return;}
   const img=document.getElementById('firma-img');
-  if(img.style.display!=='none'&&!img.complete)await new Promise(r=>{img.onload=r;img.onerror=r;});
+  if(img.style.display!=='none'&&!img.complete)
+    await new Promise(r=>{img.onload=r;img.onerror=r;});
 
   const base=document.getElementById('doc'),cl=base.cloneNode(true);
   const srcCtrls=base.querySelectorAll('input,textarea,select');
   cl.querySelectorAll('input,textarea,select').forEach((el,i)=>{
     const s=srcCtrls[i],sp=document.createElement('span');
     sp.style.cssText='white-space:pre-wrap;display:block;text-align:left';
-    if(s.type==='checkbox')sp.textContent=s.checked?'☑':'☐';
-    else if(s.tagName==='SELECT')sp.textContent=s.value;
+    if(s.type==='checkbox') sp.textContent=s.checked?'☑':'☐';
+    else if(s.tagName==='SELECT') sp.textContent=(s.value||'').split('\\n').join('\n');
     else sp.textContent=(s.value||'').trimStart();
     el.replaceWith(sp);
   });
@@ -204,12 +200,12 @@ async function generarPDF(){
   }).from(cl).save();
 }
 
-/* ==== eventos ==== */
 window.addEventListener('DOMContentLoaded',()=>{
   document.getElementById('ruc').addEventListener('change',rellenar);
   document.querySelectorAll('textarea').forEach(t=>{autoResize(t);t.addEventListener('input',()=>autoResize(t));});
   document.getElementById('btn-pdf').addEventListener('click',generarPDF);
   setFecha();
+  document.getElementById('version-info').textContent = "Versión: " + timestamp();
 });
 window.addEventListener('beforeprint',setFecha);
 </script>
