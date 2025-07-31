@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Solicitud de Devolución de Garantía</title>
+
+  <!-- Hoja de estilos -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Librería para crear el PDF -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  <!-- Lógica de la página -->
+  <script defer src="script.js"></script>
+</head>
+<body>
+
+  <!-- Contenido que sí irá al PDF -->
+  <div id="doc">
+    <h1>ANEXO 01</h1>
+    <h2>SOLICITUD DE DEVOLUCIÓN DE GARANTÍA DE FIEL CUMPLIMIENTO</h2>
+
+    <table id="formulario">
+      <colgroup>
+        <col class="w4"><col class="w18"><col class="w39"><col class="w39">
+      </colgroup>
+
+      <!-- 1. Datos de la empresa ------------------------------------------------>
+      <tr>
+        <td class="col-num" rowspan="4">1</td>
+        <td class="col-title" rowspan="4">DATOS DE LA<br>EMPRESA O<br>PERSONA NATURAL</td>
+        <td>NOMBRE O RAZÓN SOCIAL</td>
+        <td><textarea id="razon_social" rows="2"></textarea></td>
+      </tr>
+      <tr>
+        <td>RUC</td>
+        <td>
+          <select id="ruc">
+            <option value="">Seleccione un RUC</option>
+            <option value="20601438462">20601438462</option>
+            <option value="20102188293">20102188293</option>
+            <option value="20602334237">20602334237</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>NOMBRE DEL REPRESENTANTE O<br>APODERADO LEGAL</td>
+        <td><textarea id="representante" rows="2"></textarea></td>
+      </tr>
+      <tr>
+        <td>CORREO ELECTRÓNICO</td>
+        <td><input type="email" id="correo" /></td>
+      </tr>
+
+      <!-- 2. Datos del acuerdo ------------------------------------------------->
+      <tr>
+        <td class="col-num" rowspan="2">2</td>
+        <td class="col-title" rowspan="2">DATOS DEL ACUERDO</td>
+        <td>ACUERDO MARCO</td>
+        <td>
+          <select id="acuerdo">
+            <option value="EXT-CE-2022-5\nCOMPUTADORAS DE ESCRITORIO,\nCOMPUTADORAS PORTÁTILES Y ESCÁNERES">
+EXT-CE-2022-5
+COMPUTADORAS DE ESCRITORIO,
+COMPUTADORAS PORTÁTILES Y ESCÁNERES
+            </option>
+            <option value="IM-CE-2018-3\nCOMPUTADORAS DE ESCRITORIO,\nCOMPUTADORAS PORTÁTILES Y ESCÁNERES">
+IM-CE-2018-3
+COMPUTADORAS DE ESCRITORIO,
+COMPUTADORAS PORTÁTILES Y ESCÁNERES
+            </option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>IMPORTE DE GARANTÍA</td>
+        <td><input type="text" /></td>
+      </tr>
+
+      <!-- 3. Motivos ----------------------------------------------------------->
+      <tr>
+        <td class="col-num" rowspan="2">3</td>
+        <td class="col-title" rowspan="2">MOTIVOS</td>
+        <td colspan="2">
+          <div class="checkbox-group"><span class="checkbox-text">Culminó la vigencia del Acuerdo Marco.</span><input type="checkbox" /></div>
+          <div class="checkbox-group"><span class="checkbox-text">Por error en el código del Acuerdo Marco.</span><input type="checkbox" /></div>
+          <div class="checkbox-group"><span class="checkbox-text">Por depósito fuera de fecha.</span><input type="checkbox" /></div>
+          <div class="checkbox-group"><span class="checkbox-text">Por duplicidad en el depósito.</span><input type="checkbox" /></div>
+          <div class="checkbox-group"><span class="checkbox-text">Por error en el importe depositado.</span><input type="checkbox" /></div>
+          <div class="checkbox-group"><span class="checkbox-text">Por desistimiento de la solicitud de inclusión.</span><input type="checkbox" /></div>
+          <div class="checkbox-group"><span class="checkbox-text">Por depósito realizado sin haber cumplido el periodo de exclusión.</span><input type="checkbox" /></div>
+          <div class="checkbox-group"><span class="checkbox-text">(*) Otros establecidos en los documentos asociados al Acuerdo Marco.</span><input type="checkbox" /></div>
+        </td>
+      </tr>
+      <tr><td colspan="2">(*) Precisar:</td></tr>
+
+      <!-- 4. Firma ------------------------------------------------------------->
+      <tr>
+        <td class="col-num" rowspan="2">4</td>
+        <td class="area-grande" colspan="2"><div id="fecha-actual">&nbsp;</div></td>
+        <td><img id="firma-img" class="firma-img" src="" alt="firma" style="display:none" /></td>
+      </tr>
+      <tr>
+        <td class="centered" colspan="2">FECHA</td>
+        <td class="centered">FIRMA DEL SOLICITANTE</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Versión (no se imprime) -->
+  <div class="no-print version" id="version-info"></div>
+
+  <!-- Botón de impresión -->
+  <button id="btn-pdf" class="no-print">Imprimir PDF</button>
+</body>
+</html>
