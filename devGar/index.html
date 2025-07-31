@@ -1,207 +1,235 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <title>Solicitud de Devolución de Garantía</title>
+<meta charset="utf-8">
+<title>Solicitud de Devolución de Garantía</title>
 
-  <style>
-    body { font-family: Arial, sans-serif; font-size: 12px; margin: 40px; }
-    h1, h2 { text-align: center; margin: 0; }
-    h1 { font-size: 16px; margin-bottom: 5px; }
-    h2 { font-size: 14px; margin-bottom: 18px; }
+<style>
+    /* ——— Básico ——— */
+    body{font-family:Arial,sans-serif;font-size:12px;margin:40px}
+    h1,h2{text-align:center;margin:0}
+    h1{font-size:16px;margin-bottom:5px}
+    h2{font-size:14px;margin-bottom:18px}
 
-    table#formulario {
-      width: 100%;
-      border-collapse: collapse;
-      border: 1px solid #000;
-    }
-    table#formulario td {
-      border: 1px solid #000;
-      padding: 4px;
-      vertical-align: top;
-    }
-    col.w4 { width: 4%; }
-    col.w18 { width: 18%; }
-    col.w39 { width: 39%; }
+    /* ——— Tabla ——— */
+    table#formulario{width:100%;border-collapse:collapse;border:1px solid #000}
+    table#formulario td{border:1px solid #000;padding:4px;vertical-align:top}
+    col.w4  {width:4%}
+    col.w18 {width:18%}
+    col.w39 {width:39%}
 
-    input[type=text], input[type=email], select, textarea {
-      width: 100%;
-      border: none;
-      outline: none;
-      font: inherit;
-      text-align: left;
-      background: transparent;
+    /* ——— Controles ——— */
+    input[type=text],input[type=email],select,textarea{
+        width:100%;border:none;outline:none;font:inherit;text-align:left;background:transparent
     }
-    select { appearance: none; height: 20px; }
-    textarea {
-      resize: none;
-      overflow: hidden;
-      white-space: pre-wrap;
-      word-break: break-word;
-    }
-    textarea::-webkit-scrollbar { width: 0; height: 0; }
-    textarea { scrollbar-width: none; }
+    select{appearance:none;height:20px} /* fila RUC ↓ */
+    textarea{resize:none;overflow:hidden;white-space:pre-wrap;word-break:break-word}
+    textarea::-webkit-scrollbar{width:0;height:0}
+    textarea{scrollbar-width:none}
 
-    .col-num { text-align: center; font-weight: bold; }
-    .col-title { font-weight: bold; }
-    .firma-img { display: block; margin: 0 auto; max-width: 80%; height: auto; }
-    .checkbox-group { display: flex; justify-content: space-between; margin-bottom: 3px; }
-    .checkbox-text { flex: 1; padding-right: 8px; }
-    .area-grande { min-height: 2.5cm; text-align: center; vertical-align: middle; }
-    .centered { text-align: center; font-weight: bold; }
-    tr { page-break-inside: avoid; }
-    #fecha-actual { text-align: center; }
+    /* ——— Estilos varios ——— */
+    .col-num{text-align:center;font-weight:bold}
+    .col-title{font-weight:bold}
+    .firma-img{display:block;margin:0 auto;max-width:80%;height:auto}
+    .checkbox-group{display:flex;justify-content:space-between;margin-bottom:3px}
+    .checkbox-text{flex:1;padding-right:8px}
+    .area-grande{min-height:2.5cm;text-align:center;vertical-align:middle}
+    .centered{text-align:center;font-weight:bold}
+    tr{page-break-inside:avoid}
 
-    #btn-pdf {
-      margin-top: 18px;
-      padding: 8px 12px;
-      font-size: 12px;
-      background: #eee;
-      border: 1px solid #ccc;
-      cursor: pointer;
-    }
-    .no-print { display: block; }
-    @media print { .no-print { display: none; } }
-  </style>
+    /* ——— Centrar la fecha ——— */
+    #fecha-actual{text-align:center}
+
+    /* ——— Botón ——— */
+    #btn-pdf{margin-top:18px;padding:8px 12px;font-size:12px;background:#eee;border:1px solid #ccc;cursor:pointer}
+    .no-print{display:block}
+    @media print{.no-print{display:none}}
+</style>
 </head>
 <body>
 
 <div id="doc">
-  <h1>ANEXO 01</h1>
-  <h2>SOLICITUD DE DEVOLUCIÓN DE GARANTÍA DE FIEL CUMPLIMIENTO</h2>
+    <h1>ANEXO 01</h1>
+    <h2>SOLICITUD DE DEVOLUCIÓN DE GARANTÍA DE FIEL CUMPLIMIENTO</h2>
 
-  <table id="formulario">
-    <colgroup><col class="w4"><col class="w18"><col class="w39"><col class="w39"></colgroup>
+    <table id="formulario">
+        <colgroup><col class="w4"><col class="w18"><col class="w39"><col class="w39"></colgroup>
 
-    <!-- 1. DATOS DE LA EMPRESA -->
-    <tr>
-      <td class="col-num" rowspan="4">1</td>
-      <td class="col-title" rowspan="4">DATOS DE LA<br>EMPRESA O<br>PERSONA NATURAL</td>
-      <td>NOMBRE O RAZÓN SOCIAL</td>
-      <td><textarea id="razon_social" rows="2"></textarea></td>
-    </tr>
-    <tr>
-      <td>RUC</td>
-      <td><select id="ruc">
-        <option value="">Seleccione un RUC</option>
-        <option value="20601438462">20601438462</option>
-        <option value="20102188293">20102188293</option>
-        <option value="20602334237">20602334237</option>
-      </select></td>
-    </tr>
-    <tr>
-      <td>NOMBRE DEL REPRESENTANTE O<br>APODERADO LEGAL</td>
-      <td><textarea id="representante" rows="2"></textarea></td>
-    </tr>
-    <tr>
-      <td>CORREO ELECTRÓNICO</td>
-      <td><input type="email" id="correo"></td>
-    </tr>
+        <!-- 1. DATOS DE LA EMPRESA -->
+        <tr>
+            <td class="col-num" rowspan="4">1</td>
+            <td class="col-title" rowspan="4">DATOS DE LA<br>EMPRESA O<br>PERSONA NATURAL</td>
+            <td>NOMBRE O RAZÓN SOCIAL</td>
+            <td><textarea id="razon_social" rows="2"></textarea></td>
+        </tr>
+        <tr>
+            <td>RUC</td>
+            <td>
+                <select id="ruc">
+                    <option value="">Seleccione un RUC</option>
+                    <option value="20601438462">20601438462</option>
+                    <option value="20102188293">20102188293</option>
+                    <option value="20602334237">20602334237</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>NOMBRE DEL REPRESENTANTE O<br>APODERADO LEGAL</td>
+            <td><textarea id="representante" rows="2"></textarea></td>
+        </tr>
+        <tr>
+            <td>CORREO ELECTRÓNICO</td>
+            <td><input type="email" id="correo"></td>
+        </tr>
 
-    <!-- 2. DATOS DEL ACUERDO -->
-    <tr>
-      <td class="col-num" rowspan="2">2</td>
-      <td class="col-title" rowspan="2">DATOS DEL ACUERDO</td>
-      <td>SELECCIONAR ACUERDO MARCO</td>
-      <td>
-        <select id="acuerdo_select">
-          <option value="">Seleccione un Acuerdo Marco</option>
-          <option value="EXT-CE-2022-5">EXT-CE-2022-5</option>
-          <option value="IM-CE-2018-3">IM-CE-2018-3</option>
-        </select>
-      </td>
-    </tr>
-    <tr>
-      <td>DESCRIPCIÓN DEL ACUERDO MARCO</td>
-      <td><textarea id="acuerdo_texto" rows="3" readonly></textarea></td>
-    </tr>
+        <!-- 2. DATOS DEL ACUERDO -->
+        <tr>
+            <td class="col-num" rowspan="3">2</td>
+            <td class="col-title" rowspan="3">DATOS DEL ACUERDO</td>
+            <td>ACUERDO MARCO<br>
+                <!-- selector de acuerdos -->
+                <select id="acuerdo_select" class="no-print" style="margin-top:2px;height:22px">
+                    <option value="">— Seleccione —</option>
+                    <option value="EXT">EXT-CE-2022-5</option>
+                    <option value="IM">IM-CE-2018-3</option>
+                </select>
+            </td>
+            <td>
+                <textarea id="acuerdo" rows="3">EXT-CE-2022-5
+COMPUTADORAS DE ESCRITORIO,
+COMPUTADORAS PORTÁTILES Y ESCÁNERES</textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>IMPORTE DE GARANTÍA</td>
+            <td><input type="text"></td>
+        </tr>
 
-    <!-- 3. MOTIVOS -->
-    <tr>
-      <td class="col-num" rowspan="2">3</td>
-      <td class="col-title" rowspan="2">MOTIVOS</td>
-      <td colspan="2">
-        <div class="checkbox-group"><span class="checkbox-text">Culminó la vigencia del Acuerdo Marco.</span><input type="checkbox"></div>
-        <div class="checkbox-group"><span class="checkbox-text">Por error en el código del Acuerdo Marco.</span><input type="checkbox"></div>
-        <div class="checkbox-group"><span class="checkbox-text">Por depósito fuera de fecha.</span><input type="checkbox"></div>
-        <div class="checkbox-group"><span class="checkbox-text">Por duplicidad en el depósito.</span><input type="checkbox"></div>
-        <div class="checkbox-group"><span class="checkbox-text">Por error en el importe depositado.</span><input type="checkbox"></div>
-        <div class="checkbox-group"><span class="checkbox-text">Por desistimiento de la solicitud de inclusión.</span><input type="checkbox"></div>
-        <div class="checkbox-group"><span class="checkbox-text">Por depósito realizado sin haber cumplido el periodo de exclusión.</span><input type="checkbox"></div>
-        <div class="checkbox-group"><span class="checkbox-text">(*) Otros establecidos en los documentos asociados al Acuerdo Marco.</span><input type="checkbox"></div>
-      </td>
-    </tr>
-    <tr><td colspan="2">(*) Precisar:</td></tr>
+        <!-- 3. MOTIVOS -->
+        <tr>
+            <td class="col-num" rowspan="2">3</td>
+            <td class="col-title" rowspan="2">MOTIVOS</td>
+            <td colspan="2">
+                <div class="checkbox-group"><span class="checkbox-text">Culminó la vigencia del Acuerdo Marco.</span><input type="checkbox"></div>
+                <div class="checkbox-group"><span class="checkbox-text">Por error en el código del Acuerdo Marco.</span><input type="checkbox"></div>
+                <div class="checkbox-group"><span class="checkbox-text">Por depósito fuera de fecha.</span><input type="checkbox"></div>
+                <div class="checkbox-group"><span class="checkbox-text">Por duplicidad en el depósito.</span><input type="checkbox"></div>
+                <div class="checkbox-group"><span class="checkbox-text">Por error en el importe depositado.</span><input type="checkbox"></div>
+                <div class="checkbox-group"><span class="checkbox-text">Por desistimiento de la solicitud de inclusión.</span><input type="checkbox"></div>
+                <div class="checkbox-group"><span class="checkbox-text">Por depósito realizado sin haber cumplido el periodo de exclusión.</span><input type="checkbox"></div>
+                <div class="checkbox-group"><span class="checkbox-text">(*) Otros establecidos en los documentos asociados al Acuerdo Marco.</span><input type="checkbox"></div>
+            </td>
+        </tr>
+        <tr><td colspan="2">(*) Precisar:</td></tr>
 
-    <!-- 4. FIRMA -->
-    <tr>
-      <td class="col-num" rowspan="2">4</td>
-      <td class="area-grande" colspan="2"><div id="fecha-actual">&nbsp;</div></td>
-      <td><img id="firma-img" class="firma-img" src="" alt="firma" style="display:none"></td>
-    </tr>
-    <tr>
-      <td class="centered" colspan="2">FECHA</td>
-      <td class="centered">FIRMA DEL SOLICITANTE</td>
-    </tr>
-  </table>
+        <!-- 4. FIRMA -->
+        <tr>
+            <td class="col-num" rowspan="2">4</td>
+            <td class="area-grande" colspan="2"><div id="fecha-actual">&nbsp;</div></td>
+            <td><img id="firma-img" class="firma-img" src="" alt="firma" style="display:none"></td>
+        </tr>
+        <tr>
+            <td class="centered" colspan="2">FECHA</td>
+            <td class="centered">FIRMA DEL SOLICITANTE</td>
+        </tr>
+    </table>
 </div>
 
 <button id="btn-pdf" class="no-print">Imprimir PDF</button>
 
+<!-- html2pdf -->
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
 <script>
-  const empresas = {
-    "20601438462": { razon: "OFICINA TOTAL S.A.", rep: "PAREDES ZEBALLOS,\nPAOLA ESTHER", correo: "pparedes@oficinatotal.pe" },
-    "20102188293": { razon: "INGENIERIA DE LA INFORMATICA S.A.\nINFORDATA S.A.", rep: "VICENTE HUAPAYA\nJUAN CARLOS", correo: "jvicente@infordata.com.pe" },
-    "20602334237": { razon: "VASTEC S.A.", rep: "VICENTE HUAPAYA,\nJUAN CARLOS", correo: "jvicente@vastec.com.pe" }
-  };
+/* ==== Datos por RUC ==== */
+const empresas={
+  "20601438462":{razon:"OFICINA TOTAL S.A.",rep:"PAREDES ZEBALLOS,\nPAOLA ESTHER",correo:"pparedes@oficinatotal.pe"},
+  "20102188293":{razon:"INGENIERIA DE LA INFORMATICA S.A.\nINFORDATA S.A.",rep:"VICENTE HUAPAYA\nJUAN CARLOS",correo:"jvicente@infordata.com.pe"},
+  "20602334237":{razon:"VASTEC S.A.",rep:"VICENTE HUAPAYA,\nJUAN CARLOS",correo:"jvicente@vastec.com.pe"}
+};
 
-  const acuerdos = {
-    "EXT-CE-2022-5": "EXT-CE-2022-5\nCOMPUTADORAS DE ESCRITORIO,\nCOMPUTADORAS PORTÁTILES Y ESCÁNERES",
-    "IM-CE-2018-3": "IM-CE-2018-3\nCOMPUTADORAS DE ESCRITORIO,\nCOMPUTADORAS PORTÁTILES Y ESCÁNERES"
-  };
+/* ==== Acuerdos disponibles ==== */
+const acuerdos={
+  "EXT":`EXT-CE-2022-5
+COMPUTADORAS DE ESCRITORIO,
+COMPUTADORAS PORTÁTILES Y ESCÁNERES`,
+  "IM":`IM-CE-2018-3
+COMPUTADORAS DE ESCRITORIO,
+COMPUTADORAS PORTÁTILES Y ESCÁNERES`
+};
 
-  function autoResize(t) {
-    t.style.height = 'auto';
-    t.style.height = t.scrollHeight + 'px';
+/* ==== Utilidades ==== */
+const autoResize=t=>{t.style.height='auto';t.style.height=t.scrollHeight+'px';};
+const selloTiempo=()=>{const d=new Date();return d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0')+String(d.getHours()).padStart(2,'0')+String(d.getMinutes()).padStart(2,'0');};
+
+/* ==== Rellenar datos ==== */
+function rellenar(){
+  const ruc=document.getElementById('ruc').value, d=empresas[ruc]||{};
+  document.getElementById('razon_social').value=d.razon||"";
+  document.getElementById('representante').value=d.rep||"";
+  document.getElementById('correo').value=d.correo||"";
+  document.querySelectorAll('textarea').forEach(autoResize);
+
+  const img=document.getElementById('firma-img');
+  if(ruc){img.src=`${ruc}.png`;img.style.display='block';}
+  else  {img.removeAttribute('src');img.style.display='none';}
+}
+
+/* ==== Cambiar acuerdo ==== */
+function cambioAcuerdo(){
+  const sel=document.getElementById('acuerdo_select').value;
+  if(sel){
+    const ta=document.getElementById('acuerdo');
+    ta.value=acuerdos[sel];
+    autoResize(ta);
   }
+}
 
-  function setFecha() {
-    const d = new Date();
-    const dia = String(d.getDate()).padStart(2, '0');
-    const mes = String(d.getMonth() + 1).padStart(2, '0');
-    const anio = d.getFullYear();
-    document.getElementById('fecha-actual').textContent = `${dia}/${mes}/${anio}`;
-  }
+/* ==== Fecha dd/mm/yyyy ==== */
+function setFecha(){
+  const hoy=new Date(),
+        dia=String(hoy.getDate()).padStart(2,'0'),
+        mes=String(hoy.getMonth()+1).padStart(2,'0'),
+        anio=hoy.getFullYear();
+  document.getElementById('fecha-actual').textContent=`${dia}/${mes}/${anio}`;
+}
 
-  function rellenar() {
-    const ruc = document.getElementById('ruc').value;
-    const e = empresas[ruc] || {};
-    document.getElementById('razon_social').value = e.razon || "";
-    document.getElementById('representante').value = e.rep || "";
-    document.getElementById('correo').value = e.correo || "";
-    document.querySelectorAll('textarea').forEach(autoResize);
-    const img = document.getElementById('firma-img');
-    if (ruc) { img.src = `${ruc}.png`; img.style.display = 'block'; } else { img.removeAttribute('src'); img.style.display = 'none'; }
-  }
+/* ==== Generar PDF ==== */
+async function generarPDF(){
+  if(typeof html2pdf==='undefined'){alert('html2pdf no cargó');return;}
 
-  function actualizarAcuerdo() {
-    const val = document.getElementById('acuerdo_select').value;
-    document.getElementById('acuerdo_texto').value = acuerdos[val] || "";
-    autoResize(document.getElementById('acuerdo_texto'));
-  }
+  const img=document.getElementById('firma-img');
+  if(img.style.display!=='none' && !img.complete) await new Promise(r=>{img.onload=r;img.onerror=r;});
 
-  window.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('ruc').addEventListener('change', rellenar);
-    document.getElementById('acuerdo_select').addEventListener('change', actualizarAcuerdo);
-    document.querySelectorAll('textarea').forEach(t => {
-      autoResize(t);
-      t.addEventListener('input', () => autoResize(t));
-    });
-    setFecha();
+  const base=document.getElementById('doc'), clone=base.cloneNode(true);
+  const srcCtrls=base.querySelectorAll('input,textarea,select');
+  clone.querySelectorAll('input,textarea,select').forEach((el,i)=>{
+    const s=srcCtrls[i], span=document.createElement('span');
+    span.style.cssText="white-space:pre-wrap;display:block;text-align:left";
+    if(s.type==='checkbox') span.textContent=s.checked?'☑':'☐';
+    else if(s.tagName==='SELECT') span.textContent=s.value.trim();
+    else span.textContent=(s.value||'').trimStart();
+    el.replaceWith(span);
   });
 
-  window.addEventListener('beforeprint', setFecha);
-</script>
+  html2pdf().set({
+    margin:5,
+    filename:`SolDevGar(${selloTiempo()}).pdf`,
+    image:{type:'jpeg',quality:0.98},
+    html2canvas:{scale:2,useCORS:true},
+    jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}
+  }).from(clone).save();
+}
 
+/* ==== Eventos ==== */
+window.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('ruc').addEventListener('change',rellenar);
+  document.getElementById('acuerdo_select').addEventListener('change',cambioAcuerdo);
+  document.querySelectorAll('textarea').forEach(t=>{autoResize(t);t.addEventListener('input',()=>autoResize(t));});
+  document.getElementById('btn-pdf').addEventListener('click',generarPDF);
+  setFecha();
+});
+window.addEventListener('beforeprint',setFecha);
+</script>
 </body>
 </html>
