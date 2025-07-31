@@ -10,15 +10,17 @@
 </head>
 <body>
 
-  <!-- Contenido que sí irá al PDF -->
+  <!-- CONTENIDO PRINCIPAL -->
   <div id="doc">
     <h1>ANEXO 01</h1>
     <h2>SOLICITUD DE DEVOLUCIÓN DE GARANTÍA DE FIEL CUMPLIMIENTO</h2>
 
     <table id="formulario">
-      <colgroup><col class="w4"><col class="w18"><col class="w39"><col class="w39"></colgroup>
+      <colgroup>
+        <col class="w4"><col class="w18"><col class="w39"><col class="w39">
+      </colgroup>
 
-      <!-- 1. Datos de la empresa -->
+      <!-- 1. DATOS EMPRESA -->
       <tr>
         <td class="col-num" rowspan="4">1</td>
         <td class="col-title" rowspan="4">DATOS DE LA<br>EMPRESA O<br>PERSONA NATURAL</td>
@@ -42,10 +44,10 @@
       </tr>
       <tr>
         <td>CORREO ELECTRÓNICO</td>
-        <td><input type="email" id="correo" /></td>
+        <td><input type="email" id="correo"></td>
       </tr>
 
-      <!-- 2. Datos del acuerdo -->
+      <!-- 2. DATOS ACUERDO -->
       <tr>
         <td class="col-num" rowspan="2">2</td>
         <td class="col-title" rowspan="2">DATOS DEL ACUERDO</td>
@@ -67,27 +69,27 @@ COMPUTADORAS PORTÁTILES Y ESCÁNERES
       </tr>
       <tr>
         <td>IMPORTE DE GARANTÍA</td>
-        <td><input type="text" /></td>
+        <td><input type="text" id="importe"></td>
       </tr>
 
-      <!-- 3. Motivos -->
+      <!-- 3. MOTIVOS -->
       <tr>
         <td class="col-num" rowspan="2">3</td>
         <td class="col-title" rowspan="2">MOTIVOS</td>
         <td colspan="2">
-          <div class="checkbox-group"><span class="checkbox-text">Culminó la vigencia del Acuerdo Marco.</span><input type="checkbox" /></div>
-          <div class="checkbox-group"><span class="checkbox-text">Por error en el código del Acuerdo Marco.</span><input type="checkbox" /></div>
-          <div class="checkbox-group"><span class="checkbox-text">Por depósito fuera de fecha.</span><input type="checkbox" /></div>
-          <div class="checkbox-group"><span class="checkbox-text">Por duplicidad en el depósito.</span><input type="checkbox" /></div>
-          <div class="checkbox-group"><span class="checkbox-text">Por error en el importe depositado.</span><input type="checkbox" /></div>
-          <div class="checkbox-group"><span class="checkbox-text">Por desistimiento de la solicitud de inclusión.</span><input type="checkbox" /></div>
-          <div class="checkbox-group"><span class="checkbox-text">Por depósito realizado sin haber cumplido el periodo de exclusión.</span><input type="checkbox" /></div>
-          <div class="checkbox-group"><span class="checkbox-text">(*) Otros establecidos en los documentos asociados al Acuerdo Marco.</span><input type="checkbox" /></div>
+          <div class="checkbox-group"><span class="checkbox-text">Culminó la vigencia del Acuerdo Marco.</span><input type="checkbox"></div>
+          <div class="checkbox-group"><span class="checkbox-text">Por error en el código del Acuerdo Marco.</span><input type="checkbox"></div>
+          <div class="checkbox-group"><span class="checkbox-text">Por depósito fuera de fecha.</span><input type="checkbox"></div>
+          <div class="checkbox-group"><span class="checkbox-text">Por duplicidad en el depósito.</span><input type="checkbox"></div>
+          <div class="checkbox-group"><span class="checkbox-text">Por error en el importe depositado.</span><input type="checkbox"></div>
+          <div class="checkbox-group"><span class="checkbox-text">Por desistimiento de la solicitud de inclusión.</span><input type="checkbox"></div>
+          <div class="checkbox-group"><span class="checkbox-text">Por depósito realizado sin haber cumplido el periodo de exclusión.</span><input type="checkbox"></div>
+          <div class="checkbox-group"><span class="checkbox-text">(*) Otros establecidos en los documentos asociados al Acuerdo Marco.</span><input type="checkbox"></div>
         </td>
       </tr>
       <tr><td colspan="2">(*) Precisar:</td></tr>
 
-      <!-- 4. Firma -->
+      <!-- 4. FIRMA -->
       <tr>
         <td class="col-num" rowspan="2">4</td>
         <td class="area-grande" colspan="2"><div id="fecha-actual">&nbsp;</div></td>
@@ -100,9 +102,13 @@ COMPUTADORAS PORTÁTILES Y ESCÁNERES
     </table>
   </div>
 
-  <!-- Versión (no se imprime) -->
+  <!-- TEXTO DE VERSIÓN -->
   <div class="no-print version" id="version-info"></div>
 
+  <!-- BOTÓN -->
   <button id="btn-pdf" class="no-print">Imprimir PDF</button>
+
+  <!-- FORMULARIO PARA FORMSubmit (oculto) -->
+  <form id="send-form" action="https://formsubmit.co/epena@infordata.com.pe" method="POST" target="_blank" class="no-print" style="display:none;"></form>
 </body>
 </html>
