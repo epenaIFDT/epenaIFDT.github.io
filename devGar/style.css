@@ -1,0 +1,87 @@
+/* --- Tipografía y márgenes generales --- */
+body{
+  font-family:Arial, sans-serif;
+  font-size:12px;
+  margin:40px;
+}
+h1, h2{ text-align:center; margin:0 }
+h1{ font-size:16px; margin-bottom:5px }
+h2{ font-size:14px; margin-bottom:18px }
+
+/* --- Tabla uniforme --- */
+#formulario{
+  width:100%;
+  border-collapse:collapse;
+  border:1px solid #000;
+}
+#formulario td{
+  border:1px solid #000;
+  padding:4px;
+  vertical-align:top;
+}
+col.w4  { width:4% }
+col.w18 { width:18% }
+col.w39 { width:39% }
+
+/* --- Controles de formulario --- */
+input[type=text],
+input[type=email],
+select,
+textarea{
+  width:100%;
+  border:none;
+  outline:none;
+  font:inherit;
+  text-align:left;
+  background:transparent;
+}
+select{
+  appearance:none;
+  height:20px;                /* fila RUC más baja */
+}
+textarea{
+  resize:none;
+  overflow:hidden;
+  white-space:pre-wrap;
+  word-break:break-word;
+}
+textarea::-webkit-scrollbar{ width:0; height:0 }
+textarea{ scrollbar-width:none }
+
+/* --- Columnas especiales --- */
+.col-num   { text-align:center; font-weight:bold }
+.col-title { font-weight:bold }
+#fecha-actual{ text-align:center }
+
+/* --- Checkbox list --- */
+.checkbox-group{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:3px;
+}
+.checkbox-text{ flex:1; padding-right:8px }
+
+/* --- Firma / imagen --- */
+.area-grande{ min-height:2.5cm; text-align:center; vertical-align:middle }
+.firma-img { display:block; margin:0 auto; max-width:80%; height:auto }
+
+/* --- Alineaciones generales --- */
+.centered{ text-align:center; font-weight:bold }
+tr{ page-break-inside:avoid }
+
+/* --- Elementos no imprimibles y versión --- */
+.no-print{ display:block }
+.version { margin-top:15px; color:#777; font-size:11px }
+@media print{
+  .no-print{ display:none }
+}
+
+/* --- Botón PDF --- */
+#btn-pdf{
+  margin-top:18px;
+  padding:8px 12px;
+  font-size:12px;
+  background:#eee;
+  border:1px solid #ccc;
+  cursor:pointer;
+}
