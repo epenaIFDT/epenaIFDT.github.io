@@ -109,7 +109,7 @@ window.addEventListener("DOMContentLoaded",()=>{
 
   setFecha();
   document.getElementById("version-info").textContent =
-    "Versión: b.07.31." + timeStamp();
+    "Versión: b.07.31.1." + timeStamp();
 });
 
 window.addEventListener("beforeprint",setFecha);
