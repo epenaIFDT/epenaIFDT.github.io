@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Solicitud de Devolución de Garantía</title>
+
+<!-- ===============  ESTILOS  =============== -->
+<style>
+    body{font-family:Arial,sans-serif;font-size:13px;margin:40px}
+    h1,h2{text-align:center;margin:0}
+    h1{font-size:16px;margin-bottom:5px}
+    h2{font-size:14px;margin-bottom:20px}
+
+    table{width:100%;border-collapse:collapse;table-layout:fixed}
+    col.w4  {width:4%}
+    col.w18 {width:18%}
+    col.w39 {width:39%}
+
+    td{border:1px solid #000;padding:6px;vertical-align:top}
+
+    input[type="text"],input[type="email"],select,textarea{
+        width:100%;border:none;outline:none;font-size:13px;font-family:inherit;background:transparent;text-align:left
+    }
+    select{-webkit-appearance:none;-moz-appearance:none;appearance:none;background:none}
+    textarea{resize:none;overflow:hidden;white-space:pre-wrap;word-break:break-word}
+    textarea::-webkit-scrollbar{width:0;height:0} textarea{scrollbar-width:none}
+
+    .col-numero{text-align:center;font-weight:bold}
+    .col-titulo{font-weight:bold}
+    .col-espacio{white-space:pre-wrap;word-break:break-word;text-align:left}
+
+    .checkbox-group{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+    .checkbox-text{flex-grow:1;padding-right:10px}
+    .area-grande{min-height:3cm;text-align:center;vertical-align:middle}
+    .centered{text-align:center;font-weight:bold}
+
+    /* firma → 80 % (20 % menos) */
+    .firma-img{display:block;margin:0 auto;max-width:80%;height:auto}
+
+    /* botón */
+    #btn-pdf{margin-top:20px;padding:10px 15px;font-size:13px;background:#eee;border:1px solid #ccc;cursor:pointer}
+    .no-print{display:block}
+    @media print{.no-print{display:none}}
+</style>
+</head>
+<body>
+
+<div id="doc">
+    <h1>ANEXO 01</h1>
+    <h2>SOLICITUD DE DEVOLUCIÓN DE GARANTÍA DE FIEL CUMPLIMIENTO</h2>
+
+    <table id="formulario">
+        <colgroup><col class="w4"><col class="w18"><col class="w39"><col class="w39"></colgroup>
+
+        <!-- Sección 1 -->
+        <tr>
+            <td class="col-numero" rowspan="4">1</td>
+            <td class="col-titulo" rowspan="4">DATOS DE LA<br>EMPRESA O<br>PERSONA<br>NATURAL</td>
+            <td>NOMBRE O RAZÓN SOCIAL</td>
+            <td class="col-espacio"><textarea id="razon_social" rows="2"></textarea></td>
+        </tr>
+        <tr>
+            <td>RUC</td>
+            <td class="col-espacio">
+                <select id="ruc">
+                    <option value="">Seleccione un RUC</option>
+                    <option value="20601438462">20601438462</option>
+                    <option value="20102188293">20102188293</option>
+                    <option value="20602334237">20602334237</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>NOMBRE DEL REPRESENTANTE O<br>APODERADO LEGAL</td>
+            <td class="col-espacio"><textarea id="representante" rows="2"></textarea></td>
+        </tr>
+        <tr>
+            <td>CORREO ELECTRÓNICO</td>
+            <td class="col-espacio"><input type="email" id="correo"></td>
+        </tr>
+
+        <!-- Sección 2 -->
+        <tr>
+            <td class="col-numero" rowspan="2">2</td>
+            <td class="col-titulo" rowspan="2">DATOS DEL<br>ACUERDO</td>
+            <td>ACUERDO MARCO</td>
+            <td class="col-espacio">
+                <textarea id="acuerdo" rows="3">EXT-CE-2022-5
+COMPUTADORAS DE ESCRITORIO,
+COMPUTADORAS PORTÁTILES Y ESCÁNERES</textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>IMPORTE DE GARANTÍA</td>
+            <td class="col-espacio"><input type="text"></td>
+        </tr>
+
+        <!-- Sección 3 -->
+        <tr>
+            <td class="col-numero" rowspan="2">3</td>
+            <td class="col-titulo" rowspan="2">MOTIVOS</td>
+            <td colspan="2">
+                <div class="checkbox-group"><span class="checkbox-text">Culminó la vigencia del Acuerdo Marco.</span><input type="checkbox"></div>
+                <div class="checkbox-group"><span class="checkbox-text">Por error en el código del Acuerdo Marco.</span><input type="checkbox"></div>
+                <div class="checkbox-group"><span class="checkbox-text">Por depósito fuera de fecha.</span><input type="checkbox"></div>
+                <div class="checkbox-group"><span class="checkbox-text">Por duplicidad en el depósito.</span><input type="checkbox"></div>
+                <div class="checkbox-group"><span class="checkbox-text">Por error en el importe depositado.</span><input type="checkbox"></div>
+                <div class="checkbox-group"><span class="checkbox-text">Por desistimiento de la solicitud de inclusión.</span><input type="checkbox"></div>
+                <div class="checkbox-group"><span class="checkbox-text">Por depósito realizado sin haber cumplido el periodo de exclusión.</span><input type="checkbox"></div>
+                <div class="checkbox-group"><span class="checkbox-text">(*) Otros establecidos en los documentos asociados al Acuerdo Marco.</span><input type="checkbox"></div>
+            </td>
+        </tr>
+        <tr><td colspan="2">(*) Precisar:</td></tr>
+
+        <!-- Sección 4 -->
+        <tr style="height:108px">
+            <td class="col-numero" rowspan="2">4</td>
+            <td class="area-grande" colspan="2"><div id="fecha-actual">&nbsp;</div></td>
+            <td class="col-espacio"><img id="firma-img" class="firma-img" src="" alt="firma" style="display:none"></td>
+        </tr>
+        <tr style="height:18px">
+            <td class="centered" colspan="2">FECHA</td>
+            <td class="centered">FIRMA DEL SOLICITANTE</td>
+        </tr>
+    </table>
+</div>
+
+<button id="btn-pdf" class="no-print">Imprimir PDF</button>
+
+<!-- librería ↓ (defer para asegurar que cargue antes del JS propio) -->
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<!-- ===============  SCRIPT  =============== -->
+<script>
+/* ----- datos de ejemplo ----- */
+const empresas={
+    "20601438462":{razon:"OFICINA TOTAL S.A.",rep:"PAREDES ZEBALLOS,\nPAOLA ESTHER",correo:"pparedes@oficinatotal.pe"},
+    "20102188293":{razon:"INGENIERIA DE LA INFORMATICA S.A.\nINFORDATA S.A.",rep:"VICENTE HUAPAYA\nJUAN CARLOS",correo:"jvicente@infordata.com.pe"},
+    "20602334237":{razon:"VASTEC S.A.",rep:"VICENTE HUAPAYA,\nJUAN CARLOS",correo:"jvicente@vastec.com.pe"}
+};
+
+/* utilidades */
+const resizeTa=t=>{t.style.height='auto';t.style.height=t.scrollHeight+'px';};
+const nowStamp=()=>{const d=new Date();return d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0')+String(d.getHours()).padStart(2,'0')+String(d.getMinutes()).padStart(2,'0');};
+
+/* rellenar datos */
+function rellenarDatos(){
+    const ruc=document.getElementById('ruc').value;
+    const e=empresas[ruc]||{};
+    document.getElementById('razon_social').value=e.razon||"";
+    document.getElementById('representante').value=e.rep||"";
+    document.getElementById('correo').value=e.correo||"";
+    document.querySelectorAll('textarea').forEach(resizeTa);
+
+    const img=document.getElementById('firma-img');
+    if(ruc){
+        img.src=`${ruc}.png`;
+        img.style.display='block';
+    }else{
+        img.removeAttribute('src');
+        img.style.display='none';
+    }
+}
+
+/* fecha */
+const setFecha=()=>document.getElementById('fecha-actual').textContent=new Date().toLocaleDateString('es-PE');
+
+/* PDF */
+async function exportarPDF(){
+    try{
+        /* esperar que la librería esté disponible */
+        if(typeof html2pdf==='undefined'){alert('html2pdf no cargó');return;}
+
+        /* esperar que la firma haya terminado de cargar (si existe) */
+        const img=document.getElementById('firma-img');
+        if(img.style.display!=='none' && !img.complete){
+            await new Promise(res=>{img.onload=res;img.onerror=res;});
+        }
+
+        /* clonar documento */
+        const original=document.getElementById('doc');
+        const clon=original.cloneNode(true);
+
+        /* copiar valores a spans */
+        const origCtrl=original.querySelectorAll('input,textarea,select');
+        clon.querySelectorAll('input,textarea,select').forEach((el,i)=>{
+            const src=origCtrl[i];
+            const span=document.createElement('span');
+            span.style.whiteSpace='pre-wrap';span.style.display='block';span.style.textAlign='left';
+            if(src.type==='checkbox')      span.textContent=src.checked?'☑':'☐';
+            else if(src.tagName==='SELECT')span.textContent=src.value.trim();
+            else                           span.textContent=(src.value||'').trimStart();
+            el.replaceWith(span);
+        });
+
+        await html2pdf().set({
+            margin:10,
+            filename:`SolDevGar(${nowStamp()}).pdf`,
+            image:{type:'jpeg',quality:0.98},
+            html2canvas:{scale:2,useCORS:true},
+            jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}
+        }).from(clon).save();
+    }catch(err){
+        console.error('Error al generar PDF:',err);
+        alert('Hubo un problema al generar el PDF. Revisa la consola.');
+    }
+}
+
+/* listeners */
+window.addEventListener('DOMContentLoaded',()=>{
+    document.getElementById('ruc').addEventListener('change',rellenarDatos);
+    document.querySelectorAll('textarea').forEach(t=>{resizeTa(t);t.addEventListener('input',()=>resizeTa(t));});
+    document.getElementById('btn-pdf').addEventListener('click',exportarPDF);
+    setFecha();
+});
+window.addEventListener('beforeprint',setFecha);
+</script>
+</body>
+</html>
